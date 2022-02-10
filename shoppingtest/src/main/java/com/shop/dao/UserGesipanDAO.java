@@ -2,6 +2,7 @@ package com.shop.dao;
 
 import java.util.List;
 
+import com.shop.dto.ReplyDTO;
 import com.shop.dto.UserGesipanDTO;
 import com.shop.vo.PageMaker;
 
@@ -10,7 +11,7 @@ public interface UserGesipanDAO {
 	  public UserGesipanDTO read(int bno) throws Exception;
 	  
 	  public List<UserGesipanDTO> myread(String id) throws Exception;
-
+	  public void viewcount(int bno) throws Exception;
 	  public void update(UserGesipanDTO vo) throws Exception;
 
 	  public void delete(int bno) throws Exception;
@@ -19,5 +20,10 @@ public interface UserGesipanDAO {
 	  public List<UserGesipanDTO> UserGesipanlistSearch(PageMaker pm)throws Exception;
 	//  
 	  public int UserGesipanlistSearchCount(PageMaker pm)throws Exception;
+	  
+	  public void createRe(ReplyDTO re) throws Exception;
+	  
+	  public void replyRemove(int rno) throws Exception;
+	  
 
 }

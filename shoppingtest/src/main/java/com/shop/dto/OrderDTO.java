@@ -13,9 +13,23 @@ public class OrderDTO {
 	private String delivery;
 	private String productnum;
 	private String productkind;
+	private String payname;
+	private String id;
 	
 	
 	
+	public String getPayname() {
+		return payname;
+	}
+	public void setPayname(String payname) {
+		this.payname = payname;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 	public String getProductcontent() {
 		return productcontent;
 	}
@@ -92,9 +106,12 @@ public class OrderDTO {
 	@Override
 	public String toString() {
 		return "OrderDTO [ordernum=" + ordernum + ", orderdate=" + orderdate + ", productimage=" + productimage
-				+ ", productname=" + productname + ", orderprice=" + orderprice + ", paycheck=" + paycheck
-				+ ", delivery=" + delivery + ", productnum=" + productnum + ", productkind=" + productkind + "]";
+				+ ", productname=" + productname + ", productcontent=" + productcontent + ", orderprice=" + orderprice
+				+ ", amount_orderprice=" + amount_orderprice + ", ordercount=" + ordercount + ", paycheck=" + paycheck
+				+ ", delivery=" + delivery + ", productnum=" + productnum + ", productkind=" + productkind
+				+ ", payname=" + payname + ", id=" + id + "]";
 	}
+
 	
 	
 	

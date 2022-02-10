@@ -27,7 +27,6 @@ import com.shop.vo.PageMaker;
 public class EventContrller {
 	@Inject
 	private EventService es;
-	private ReplyService rs;
 
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
@@ -40,13 +39,17 @@ public class EventContrller {
 		
 		if(session.getAttribute("id") != null) {
 			String id = (String)session.getAttribute("id");
-			int authority = (int) session.getAttribute("authority");
+			String authority = (String) session.getAttribute("authority");
 			
-			if(authority == 1) {	
+			if(authority.equals("1")) {
+				System.out.println("관리자");
+				
 				return "/eventgesipan/eventmainA";
 			}else {
+				System.out.println("사용자");
 			}
-
+			System.out.println("session : "+session);
+			System.out.println("id = "+id +", autho = "+authority);
 		}
 
 		return "/eventgesipan/eventmain";
@@ -71,30 +74,24 @@ public class EventContrller {
 	@RequestMapping(value = "/eventgesipan/eventread", method = RequestMethod.GET)
 	public void read(@RequestParam("bno") int bno,PageMaker pm,Model model) throws Exception {
 		System.out.println(pm);
-//		model.addAttribute(es.readimage(bno));
-//		System.out.println(es.readimage(bno));
+		es.viewcount(bno);
+		model.addAttribute("eventDTO",es.read(bno));
+		System.out.println(es.read(bno));	
+	}
+	
+	@RequestMapping(value = "/eventgesipan/eventreadA", method = RequestMethod.GET)
+	public void readA(@RequestParam("bno") int bno,PageMaker pm,Model model) throws Exception {
+		System.out.println(pm);
 		model.addAttribute("eventDTO",es.read(bno));
 		System.out.println(es.read(bno));
-		System.out.println("--------------------------------------------------");
-		es.viewcount(bno);
-		System.out.println(bno);
-//		System.out.println(es.selectBno(bno));
-		
-		
-//		List<ReplyDTO> replyList = es.readReply(bno);
-//		System.out.println(replyList);
-		System.out.println(es.readReply(bno));
-		model.addAttribute("replyList",es.readReply(bno));
-//		model.addAttribute("replyList",replyList);
-		
-//		return "/eventgesipan/eventread";
+
 		
 	}
 	
-	@RequestMapping(value = "/eventgesipan/eventremove", method = RequestMethod.POST)
+	@RequestMapping(value = "/eventgesipan/eventremove", method = RequestMethod.GET)
 	public String remove(@RequestParam("bno") int bno,PageMaker pm,Model model,RedirectAttributes rttr) throws Exception {
+		System.out.println(bno);
 		es.remove(bno);
-		
 		rttr.addAttribute("page", pm.getPage());
 		rttr.addAttribute("perPageNum", pm.getPerPageNum());
 		rttr.addAttribute("searchType", pm.getSearchType());
@@ -102,6 +99,7 @@ public class EventContrller {
 		rttr.addFlashAttribute("msg","success");
 		return "redirect:/eventgesipan/eventmain";	
 	}
+	
 	
 	@RequestMapping(value = "/eventgesipan/eventmodify", method = RequestMethod.GET)
 	public void modifyGet(@RequestParam("bno") int bno,PageMaker pm,Model model) throws Exception {

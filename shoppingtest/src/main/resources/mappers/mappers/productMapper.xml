@@ -41,11 +41,50 @@ select * from product</select>
 <![CDATA[select productnum, productname, productkind, productprice, productcontent,productimage, productsales from
 (select /*+INDEX_DESC(product,pk_product)*/ 
 rownum rn, productnum, productname, productkind, productprice,productcontent, productimage, productsales
-from product where productkind like #{productkind} and rownum <= #{page} * #{perPageNum} ) where rn > (#{page} -1) * #{perPageNum}]]>
+from product where productkind like #{productkind} and rownum <= #{page} * #{perPageNum}  ) where rn > (#{page} -1) * #{perPageNum} order by productnum asc]]>
 </select>
 
 
 <select id="listSearchCount" resultType="int">
-<![CDATA[ select count(productnum) from product where productkind='appliances' ]]>
+<![CDATA[ select count(productnum) from product where productkind=#{productkind}]]>
+</select>
+
+<!-- 카트 담기 -->
+<insert id="addCart">
+insert into tbl_cart (cartNum, id, productnum, cartStock)
+     values (tbl_cart_seq.nextval, #{id} ,#{productnum},  #{cartStock})
+</insert>
+
+<select id="cartList" resultType="com.shop.dto.CartListDTO">
+ select
+     row_number() over(order by c.cartNum desc) as num,
+     c.cartNum, c.id, c.productnum, c.cartStock,
+     g.productname, g.productprice, g.productkind, g.productimage
+ from tbl_cart c
+     inner join product g
+         on c.productnum = g.productnum   
+     where c.id = #{id}   
+</select>
+
+<!-- 카트 삭제 -->
+<delete id="deleteCart">
+ delete tbl_cart
+     where cartNum = #{cartNum}
+         and id = #{id}
+</delete>
+
+<!-- 검색 -->
+
+<select id="ProductSearch" resultType="com.shop.dto.ProductDTO">
+<![CDATA[select distinct productnum, productname, productkind, productprice, productcontent,productimage, productsales from
+(select /*+INDEX_DESC(product,pk_product)*/ 
+rownum rn, productnum, productname, productkind, productprice,productcontent, productimage, productsales
+from product where productname like '%'||#{keyword}||'%' or productcontent like '%'||#{keyword}||'%'
+ and rownum <= #{page} * #{perPageNum}  ) 
+ where rn > (#{page} -1) * #{perPageNum} order by productnum asc]]>
+</select>
+
+<select id="ProductSearchCount" resultType="int">
+<![CDATA[ select count(productnum) from product where productname like '%'|| #{keyword}||'%' or productcontent like '%'|| #{keyword}||'%']]>
 </select>
 </mapper>

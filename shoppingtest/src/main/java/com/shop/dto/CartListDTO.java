@@ -1,24 +1,22 @@
 package com.shop.dto;
 
-import java.util.Date;
-
 public class CartListDTO {
 
 	private int cartNum;
 	private String id;
 	private String productnum;
 	private int cartStock;
-	private Date addDate;
 
 	private String productname;
 	private int productprice;
 	private String productkind;
+	private String productimage;
 	
 	@Override
 	public String toString() {
 		return "CartListDTO [cartNum=" + cartNum + ", id=" + id + ", productnum=" + productnum + ", cartStock="
-				+ cartStock + ", addDate=" + addDate + ", productname=" + productname + ", productprice=" + productprice
-				+ ", productkind=" + productkind + "]";
+				+ cartStock + ", productname=" + productname + ", productprice=" + productprice + ", productkind="
+				+ productkind + ", productimage=" + productimage + "]";
 	}
 
 	public int getCartNum() {
@@ -53,14 +51,6 @@ public class CartListDTO {
 		this.cartStock = cartStock;
 	}
 
-	public Date getAddDate() {
-		return addDate;
-	}
-
-	public void setAddDate(Date addDate) {
-		this.addDate = addDate;
-	}
-
 	public String getProductname() {
 		return productname;
 	}
@@ -84,7 +74,14 @@ public class CartListDTO {
 	public void setProductkind(String productkind) {
 		this.productkind = productkind;
 	}
-	
+
+	public String getProductimage() {
+		return productimage;
+	}
+
+	public void setProductimage(String productimage) {
+		this.productimage = productimage;
+	}
 	
 	
 	

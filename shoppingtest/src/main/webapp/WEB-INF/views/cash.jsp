@@ -134,13 +134,13 @@
 
 		<div class="header-1">
 
-			<a href="http://localhost:8081/control/" class="logo"><i
-				class="fas fa-shopping-basket"></i>FECS#</a>
+			<a href="/control" class="logo"><i
+				class="fas fa-shopping-basket"></i>S Market</a>
 
 			<div class="icons">
-				<a href="#" class="fas fa-shopping-cart"></a>
+				<a href="/control/cartList" class="fas fa-shopping-cart"></a>
             	<a href="/control/eventgesipan/eventmain" class="fas fa-gift"></a>
-            	<a href="../mypage/mypage1" class="fas fa-user-circle"></a>
+            	<a href="/control/mypage/mypage1" class="fas fa-user-circle"></a>
 			</div>
             
 
@@ -155,64 +155,79 @@
            </div>
            
            <div class="buyinfo">
-           <table id="buyitem">
+<table id="buyitem">
             <th id="thuse" colspan=2>
                구매자정보
             </th>
-
-            <tr>
-                <td id="tduse">이름</td> <td id="tduse2">${memberDTO.membername}</td>
-            </tr>
-            <tr>
-                <td id="tduse">이메일</td> <td id="tduse2">${memberDTO.email}</td>
-            </tr>
-            <tr>
-                <td id="tduse">휴대폰 번호</td> <td id="tduse2">${memberDTO.phonenum}</td>
-            </tr>
+					<tr>
+	
+		                <td id="tduse">이름</td> <td id="tduse2">${memberDTO.membername}</td>
+		            </tr>
+		            <tr>
+		
+		                <td id="tduse">이메일</td> <td id="tduse2">${memberDTO.email}</td>
+		            </tr>
+		            <tr>
+	
+		                <td id="tduse">휴대폰 번호</td> <td id="tduse2">${memberDTO.phonenum}</td>
+		            </tr>
 <!-- ---------------------------------------------------------------------- -->
-<th></th>
+
 <th id="thuse" colspan=2>
     받는사람정보
 </th>
-<th></th>
+
 <tr>
-    <td id="tduse">이름</td> <td id="tduse2">${member.name}</td>
+    
+    <td id="tduse">이름</td> <td id="tduse2"><input class="textBox" type="text" value="${memberDTO.membername}"></td>
+   
 </tr>
 <tr>
-    <td id="tduse">배송주소</td> <td id="tduse2">${member.address}</td>
+    
+    <td id="tduse">배송주소</td> <td id="tduse2"><input class="textBox" type="text" value="${memberDTO.address}"></td>
+    
 </tr>
 <tr>
-    <td id="tduse">연락처</td> <td id="tduse2">${member.phonenum}</td>
+    
+    <td id="tduse">연락처</td> <td id="tduse2"><input class="textBox" type="text" value="${memberDTO.phonenum}"></td>
+    
 </tr>
 <tr>
-    <td id="tduse">배송 요청사항</td> <td id="tduse2"
-    ><select class="menuSelect" name="delivery">
+    
+    <td id="tduse">배송 요청사항</td> <td id="tduse2">
+    <select class="menuSelect" name="delivery" style="margin-bottom: 5px;">
         <option value="KEY1"><b>문 앞</b></option>
         <option value="KEY2"><b>경비실</b></option>
         <option value="KEY3"><b>택배함</b></option>
         <option value="KEY4"><b>기타사항</b></option>
     </select></td>
+    
 </tr>
 <!-- ------------------------------------------------------------------------- -->
-<th></th>
+
 <th id="thuse" colspan=2>
     결제정보
 </th>
-<th></th>
+
 <tr>
-    <td id="tduse">총 상품가격</td> <td id="tduse2">${member.name}</td>
+    
+    <td id="tduse">총 상품가격</td> <td id="tduse2"></td>
+    
 </tr>
 <tr>
-    <td id="tduse">배송비</td> <td id="tduse2">${member.email}</td>
+    
+    <td id="tduse">배송비</td> <td id="tduse2">2500</td>
+    
 </tr>
 <tr>
+    
     <td id="tduse" style="height: 50px;">결제방법</td>
     <td id="tduse2" style="height: 50px;">
         <input type="radio" name="결제" id="sc1" onclick="dispList('0');" checked>실시간 계좌이체
         <input type="radio" name="결제" id="sc2" onclick="dispList('1');">신용/체크카드결제
         <div id="sc1_list" style="display:block">
-            <input type="text" value="국민은행" style="width: 80px; text-align: center; font-size: 16px; font-weight: bolder;">
-            <input type="text" value="777823-01-526842" style="width: 160px; text-align: center; font-size: 16px; font-weight: bolder; margin-bottom: 5px;">
+            <input type="text" value="국민은행" readonly style="width: 80px; text-align: center; font-size: 16px; font-weight: bolder;">
+            <input type="text" value="777823-01-526842" readonly style="width: 160px; text-align: center; font-size: 16px; font-weight: bolder; margin-bottom: 5px;">
         </div>
         <div id="sc2_list" style="display:none">
             <select class="menuSelect" name="delivery" style="width: 180px; margin-bottom: 5px;">
@@ -235,10 +250,9 @@
             <input type="text" style="width: 50px;" maxlength='4'>
         </div>
     </td>
+    
 </tr>
-
-
-           </table>
+</table>
            
            <div class="cart">
            	<div>
@@ -293,58 +307,7 @@
         </div>
 <!-- footer section starts  -->
 
-<section class="footer" style="background-color: #EEEEEE;">
-
-    <div class="box-container">
-
-        <div class="box">
-            <a href="#" class="logo"><i class="fas fa-shopping-basket"></i>FECS#</a>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ullam culpa sit enim nesciunt rerum laborum illum quam error ut alias!</p>
-            <div class="share">
-                <a href="#" class="btn fab fa-facebook-f"></a>
-                <a href="#" class="btn fab fa-twitter"></a>
-                <a href="#" class="btn fab fa-instagram"></a>
-                <a href="#" class="btn fab fa-linkedin"></a>
-            </div>
-        </div>
-        
-        <div class="box">
-            <h3>our location</h3>
-            <div class="links">
-                <a href="#">india</a>
-                <a href="#">USA</a>
-                <a href="#">france</a>
-                <a href="#">japan</a>
-                <a href="#">russia</a>
-            </div>
-        </div>
-
-        <div class="box">
-            <h3>quick links</h3>
-            <div class="links">
-                <a href="#">home</a>
-                <a href="#">category</a>
-                <a href="#">product</a>
-                <a href="#">deal</a>
-                <a href="#">contact</a>
-            </div>
-        </div>
-
-        <div class="box">
-            <h3>download app</h3>
-            <div class="links">
-                <a href="#">google play</a>
-                <a href="#">window xp</a>
-                <a href="#">app store</a>
-            </div>
-        </div>
-
-    </div>
-
-    <h1 class="credit"> created by <span> mr. web designer </span> | all rights reserved! </h1>
-
-</section>
-
+	<%@include file="Footer.jsp"%>
 <!-- footer section ends -->
 
  

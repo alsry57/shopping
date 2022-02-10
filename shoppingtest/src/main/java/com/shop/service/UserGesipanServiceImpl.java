@@ -7,7 +7,10 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.shop.dao.EventDAO;
 import com.shop.dao.UserGesipanDAO;
+import com.shop.dto.ReplyDTO;
 import com.shop.dto.UserGesipanDTO;
 import com.shop.vo.PageMaker;
 
@@ -61,5 +64,32 @@ public class UserGesipanServiceImpl implements UserGesipanService {
 		UserGesipanDAO dao=sqlSession.getMapper(UserGesipanDAO.class);
 		return dao.UserGesipanlistSearchCount(pm);
 	}
+
+	@Override
+	public List<ReplyDTO> readReply(int bno) throws Exception {
+		EventDAO dao=sqlSession.getMapper(EventDAO.class);
+		return dao.readReply(bno);
+	}
+
+	@Override
+	public void writeRe(ReplyDTO reply) throws Exception {
+		UserGesipanDAO dao=sqlSession.getMapper(UserGesipanDAO.class);
+		dao.createRe(reply);
+		
+	}
+
+	@Override
+	public void replyRemove(int rno) throws Exception {
+		UserGesipanDAO dao=sqlSession.getMapper(UserGesipanDAO.class);
+		dao.replyRemove(rno);
+	}
+
+	@Override
+	public void viewcount(int bno) throws Exception {
+		// TODO Auto-generated method stub
+		UserGesipanDAO dao=sqlSession.getMapper(UserGesipanDAO.class);
+		dao.viewcount(bno);
+	}
+	
 
 }

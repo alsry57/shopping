@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<% String id=(String)session.getAttribute("id"); %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,62 +13,29 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
     <!-- custom css file link  -->
-    <link rel="stylesheet" href="/control/resources/css/style.css">
+    <link rel="stylesheet" href="/control/resources/css/style.css?">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
-
+	<style>
+		img{
+			width : 200px;
+			height : 200px;
+		}
+		div .swiper-slide.box{
+			margin: 0px;
+		}
+		.box h3{
+		font-size:25px;
+		white-space:nowrap;
+		overflow:hidden;
+		text-overflow:ellipsis;
+		height:40px;
+		}
+	</style>
 </head>
 <body>
-
-<!-- header section starts 페이지 최상단  -->
-<header>
-	
-
-    <div class="header-1">
-
-        <a href="#" class="logo"><i class="fas fa-shopping-basket"></i>FECS#</a>
-        
-        <form action="" class="search-box-container">
-            <input type="search" id="search-box" placeholder="search here...">
-            <label for="search-box" class="fas fa-search"></label>
-        </form>
-
-        <div class="icons">
-            <a href="#" class="fas fa-shopping-cart"></a>
-            <a href="/control/eventgesipan/eventmain" class="fas fa-gift"></a>
-            <a href="/control/mypage/mypage1" class="fas fa-user-circle"></a>
-        </div>
-
-
-    </div>
-
-    <div class="header-2">
-
-        <div id="menu-bar" class="fas fa-bars"></div>
-
-        <nav class="navbar">
-            <a href="appliances"><b>가전제품</b></a>
-            <a href="cloth" style="margin-left: 10px;"><b>의류</b></a>
-            <a href="food" style="margin-left: 10px;"><b>식품</b></a>
-            <a href="sports" style="margin-left: 10px;"><b>스포츠</b></a>
-        </nav>
-        <div class="login">
-        
-        	<%if(id==null){ %>
-            <a href="/control/login/login">로그인 </a>&puncsp;
-            <a href="/control/login/signUp"> 회원가입 </a>&puncsp;
-            <%}else{ %>
-            <span style="font-size: 14px"><%=id%> 님 </span>&nbsp; &nbsp; 
-            <a href="/control/login/logout">로그아웃 </a>&puncsp;
-            <%} %>
-            <a href="/control/usergesipan/usermain"> 고객센터</a>
-        </div>
-    </div>
-
-</header>
-
-<!-- header section ends 페이지최상단종료 -->
+<%@include file="Header.jsp"%>
 
 <!-- home section starts 페이지중단시작  -->
 
@@ -137,16 +104,16 @@
 <div class="slideshow-container">
 
     <!-- Full-width images with number and caption text -->
-    <div class="mySlides fade">
-      <img src="resources/img/category-1.png" style="width:100%">
+    <div class="mySlides fade" style="margin-top : 20px;">
+      <img src="resources/img/category-1.jpg" style="width:100%">
     </div>
   
-    <div class="mySlides fade">
-      <img src="resources/img/category-2.png" style="width:100%">
+    <div class="mySlides fade" style="margin-top : 20px;">
+      <img src="resources/img/category-2.jpg" style="width:100%">
     </div>
   
-    <div class="mySlides fade">
-      <img src="resources/img/category-3.png" style="width:100%">
+    <div class="mySlides fade" style="margin-top : 20px;">
+      <img src="resources/img/category-3.jpg" style="width:100%">
     </div>
   
     <!-- Next and previous buttons -->
@@ -202,10 +169,10 @@
 	<div class="swiper-container">
     	<div class="swiper-wrapper">
     	<c:forEach items="${ProductBestSales}" var="best">
-				<div class="swiper-slide box">
-					<h3>${best.productname}</h3>
-					<img src="resources/img/${best.productkind}/${best.productimage}.PNG"> <a
-						href="#" class="btn">shop now</a>
+				<div class="swiper-slide box" style="margin-right: 0">
+					<h3 style="font-size:25px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; height:40px;">${best.productname}</h3>
+					<img src="resources/img/${best.productkind}/${best.productimage}.PNG"> 
+					<a href="/control/productdetail?productnum=${best.productnum}" class="btn" style="width:80%;">Shop Now</a>
 					</div>
 				</c:forEach>
     		</div>
@@ -227,228 +194,74 @@
     <div class="box-container">
 
         <div class="box">
-            <span class="discount">-33%</span>
-            <div class="icons">
-                <a href="#" class="fas fa-heart"></a>
-                <a href="#" class="fas fa-share"></a>
-                <a href="#" class="fas fa-eye"></a>
-            </div>
-            <img src="images/product-1.png" alt="">
-            <h3>organic banana</h3>
-            <div class="stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star-half-alt"></i>
-            </div>
-            <div class="price"> $10.50 <span> $13.20 </span> </div>
-            <div class="quantity">
-                <span>quantity : </span>
-                <input type="number" min="1" max="1000" value="1">
-                <span> /kg </span>
-            </div>
-            <a href="#" class="btn">add to cart</a>
-        </div>
-
-        <div class="box">
-            <span class="discount">-45%</span>
-            <div class="icons">
-                <a href="#" class="fas fa-heart"></a>
-                <a href="#" class="fas fa-share"></a>
-                <a href="#" class="fas fa-eye"></a>
-            </div>
-            <img src="images/product-2.png" alt="">
-            <h3>organic tomato</h3>
-            <div class="stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star-half-alt"></i>
-            </div>
-            <div class="price"> $10.50 <span> $13.20 </span> </div>
-            <div class="quantity">
-                <span>quantity : </span>
-                <input type="number" min="1" max="1000" value="1">
-                <span> /kg </span>
-            </div>
-            <a href="#" class="btn">add to cart</a>
-        </div>
-
-        <div class="box">
-            <span class="discount">-52%</span>
-            <div class="icons">
-                <a href="#" class="fas fa-heart"></a>
-                <a href="#" class="fas fa-share"></a>
-                <a href="#" class="fas fa-eye"></a>
-            </div>
-            <img src="images/product-3.png" alt="">
-            <h3>organic orange</h3>
-            <div class="stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star-half-alt"></i>
-            </div>
-            <div class="price"> $10.50 <span> $13.20 </span> </div>
-            <div class="quantity">
-                <span>quantity : </span>
-                <input type="number" min="1" max="1000" value="1">
-                <span> /kg </span>
-            </div>
-            <a href="#" class="btn">add to cart</a>
-        </div>
-
-        <div class="box">
-            <span class="discount">-13%</span>
-            <div class="icons">
-                <a href="#" class="fas fa-heart"></a>
-                <a href="#" class="fas fa-share"></a>
-                <a href="#" class="fas fa-eye"></a>
-            </div>
-            <img src="images/product-4.png" alt="">
-            <h3>natural mild</h3>
-            <div class="stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star-half-alt"></i>
-            </div>
-            <div class="price"> $10.50 <span> $13.20 </span> </div>
-            <div class="quantity">
-                <span>quantity : </span>
-                <input type="number" min="1" max="1000" value="1">
-                <span> /kg </span>
-            </div>
-            <a href="#" class="btn">add to cart</a>
-        </div>
-
-        <div class="box">
             <span class="discount">-20%</span>
-            <div class="icons">
-                <a href="#" class="fas fa-heart"></a>
-                <a href="#" class="fas fa-share"></a>
-                <a href="#" class="fas fa-eye"></a>
-            </div>
-            <img src="images/product-5.png" alt="">
-            <h3>organic grapes</h3>
-            <div class="stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star-half-alt"></i>
-            </div>
-            <div class="price"> $10.50 <span> $13.20 </span> </div>
-            <div class="quantity">
-                <span>quantity : </span>
-                <input type="number" min="1" max="1000" value="1">
-                <span> /kg </span>
-            </div>
-            <a href="#" class="btn">add to cart</a>
+            <img src="resources/img/appliances/refrigerator2.PNG" alt="">
+            <h3>BESPOKE 냉장고 4도어 프리스탠딩 875 L</h3>
+            <div class="price"> 1,840,000원 <span> 2,300,000원 </span> </div>
+            <a href="/control/productdetail?productnum=A-08" class="btn" style="width:100%;">Shop Now</a>
         </div>
 
         <div class="box">
-            <span class="discount">-29%</span>
-            <div class="icons">
-                <a href="#" class="fas fa-heart"></a>
-                <a href="#" class="fas fa-share"></a>
-                <a href="#" class="fas fa-eye"></a>
-            </div>
-            <img src="images/product-6.png" alt="">
-            <h3>natural almonts</h3>
-            <div class="stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star-half-alt"></i>
-            </div>
-            <div class="price"> $10.50 <span> $13.20 </span> </div>
-            <div class="quantity">
-                <span>quantity : </span>
-                <input type="number" min="1" max="1000" value="1">
-                <span> /kg </span>
-            </div>
-            <a href="#" class="btn">add to cart</a>
-        </div>
-
-        <div class="box">
-            <span class="discount">-55%</span>
-            <div class="icons">
-                <a href="#" class="fas fa-heart"></a>
-                <a href="#" class="fas fa-share"></a>
-                <a href="#" class="fas fa-eye"></a>
-            </div>
-            <img src="images/product-7.png" alt="">
-            <h3>organic apple</h3>
-            <div class="stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star-half-alt"></i>
-            </div>
-            <div class="price"> $10.50 <span> $13.20 </span> </div>
-            <div class="quantity">
-                <span>quantity : </span>
-                <input type="number" min="1" max="1000" value="1">
-                <span> /kg </span>
-            </div>
-            <a href="#" class="btn">add to cart</a>
+            <span class="discount">-15%</span>
+            <img src="resources/img/appliances/audio1.PNG" alt="">
+            <h3>하만카돈 RADIANCE 2400</h3>
+            <div class="price"> 5,355,000원 <span> 6,300,000원 </span> </div>
+            <a href="/control/productdetail?productnum=A-22" class="btn" style="width:100%;">Shop Now</a>
         </div>
 
         <div class="box">
             <span class="discount">-30%</span>
-            <div class="icons">
-                <a href="#" class="fas fa-heart"></a>
-                <a href="#" class="fas fa-share"></a>
-                <a href="#" class="fas fa-eye"></a>
-            </div>
-            <img src="images/product-8.png" alt="">
-            <h3>natural butter</h3>
-            <div class="stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star-half-alt"></i>
-            </div>
-            <div class="price"> $10.50 <span> $13.20 </span> </div>
-            <div class="quantity">
-                <span>quantity : </span>
-                <input type="number" min="1" max="1000" value="1">
-                <span> /kg </span>
-            </div>
-            <a href="#" class="btn">add to cart</a>
+            <img src="resources/img/cloth/cloth26.PNG" alt="">
+            <h3>오리지널 M-1965 피쉬테일 파카_Vintage Black</h3>
+            <div class="price"> 143,500원 <span> 205,000원 </span> </div>
+            <a href="/control/productdetail?productnum=C-14" class="btn" style="width:100%;">Shop Now</a>
+        </div>
+        <div class="box">
+            <span class="discount">-40%</span>
+            <img src="resources/img/cloth/cloth24.PNG" alt="">
+            <h3>WARM UP QUILTING JACKET BLACK</h3>
+            <div class="price"> 99,000원 <span> 165,000원 </span> </div>
+           <a href="/control/productdetail?productnum=C-24" class="btn" style="width:100%;">Shop Now</a>
         </div>
 
         <div class="box">
-            <span class="discount">-40%</span>
-            <div class="icons">
-                <a href="#" class="fas fa-heart"></a>
-                <a href="#" class="fas fa-share"></a>
-                <a href="#" class="fas fa-eye"></a>
-            </div>
-            <img src="images/product-9.png" alt="">
-            <h3>organic carrot</h3>
-            <div class="stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star-half-alt"></i>
-            </div>
-            <div class="price"> $10.50 <span> $13.20 </span> </div>
-            <div class="quantity">
-                <span>quantity : </span>
-                <input type="number" min="1" max="1000" value="1">
-                <span> /kg </span>
-            </div>
-            <a href="#" class="btn">add to cart</a>
+            <span class="discount">-50%</span>
+            <img src="resources/img/food/food-6.PNG" alt="">
+            <h3>모짜렐라핫도그</h3>
+            <div class="price"> 49,800원 <span> 24,900원 </span> </div>
+            <a href="/control/productdetail?productnum=F-06" class="btn" style="width:100%;">Shop Now</a>
+        </div>
+
+        <div class="box">
+            <span class="discount">-30%</span>
+            <img src="resources/img/food/food-10.PNG" alt="">
+            <h3>한우 등심 500G</h3>
+            <div class="price"> 51,100원 <span> 73,000원 </span> </div>
+            <a href="/control/productdetail?productnum=F-10" class="btn" style="width:100%;">Shop Now</a>
+        </div>
+
+        <div class="box">
+            <span class="discount">-25%</span>
+            <img src="resources/img/sports/sports-16.PNG" alt="">
+            <h3>모토벨로 G7 DUAL 18인치 전기자전거</h3>
+            <div class="price"> 697,500원 <span> 930,000원 </span> </div>
+            <a href="/control/productdetail?productnum=S-16" class="btn" style="width:100%;">Shop Now</a>
+        </div>
+
+        <div class="box">
+            <span class="discount">-50%</span>
+            <img src="resources/img/sports/sports-25.PNG" alt="">
+            <h3>대형 물놀이 플라밍고 홍학 튜브</h3>
+            <div class="price"> 20,700원 <span> 41,400원 </span> </div>
+			<a href="/control/productdetail?productnum=S-25" class="btn" style="width:100%;">Shop Now</a>
+        </div>
+
+        <div class="box">
+            <span class="discount">-45%</span>
+            <img src="resources/img/sports/sports-9.PNG" alt="">
+            <h3>휠라 레인저 1RM01141E100</h3>
+            <div class="price"> 49,500원 <span> 90,000원 </span> </div>
+			<a href="/control/productdetail?productnum=S-09" class="btn" style="width:100%;">Shop Now</a>
         </div>
 
     </div>
@@ -458,58 +271,7 @@
 <!-- product section ends -->
 
 <!-- footer section starts  -->
-
-<section class="footer" style="background-color: #EEEEEE;">
-
-    <div class="box-container">
-
-        <div class="box">
-            <a href="#" class="logo"><i class="fas fa-shopping-basket"></i>FECS#</a>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ullam culpa sit enim nesciunt rerum laborum illum quam error ut alias!</p>
-            <div class="share">
-                <a href="#" class="btn fab fa-facebook-f"></a>
-                <a href="#" class="btn fab fa-twitter"></a>
-                <a href="#" class="btn fab fa-instagram"></a>
-                <a href="#" class="btn fab fa-linkedin"></a>
-            </div>
-        </div>
-        
-        <div class="box">
-            <h3>our location</h3>
-            <div class="links">
-                <a href="#">india</a>
-                <a href="#">USA</a>
-                <a href="#">france</a>
-                <a href="#">japan</a>
-                <a href="#">russia</a>
-            </div>
-        </div>
-
-        <div class="box">
-            <h3>quick links</h3>
-            <div class="links">
-                <a href="#">home</a>
-                <a href="#">category</a>
-                <a href="#">product</a>
-                <a href="#">deal</a>
-                <a href="#">contact</a>
-            </div>
-        </div>
-
-        <div class="box">
-            <h3>download app</h3>
-            <div class="links">
-                <a href="#">google play</a>
-                <a href="#">window xp</a>
-                <a href="#">app store</a>
-            </div>
-        </div>
-
-    </div>
-
-    <h1 class="credit"> created by <span> mr. web designer </span> | all rights reserved! </h1>
-
-</section>
+<%@include file="Footer.jsp"%>
 
 <!-- footer section ends -->
 

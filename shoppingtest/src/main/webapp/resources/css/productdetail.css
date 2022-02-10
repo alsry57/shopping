@@ -68,7 +68,16 @@
 	border-radius:2px;
 	line-height:42px;
 }
-.table1 .tbtns > a.tbtn1 {
+.table1 .tbtns > button {
+	display: inline-block;
+	width:136px;
+	height:42px;
+	font-size:16px;
+	color:#fff;
+	border-radius:2px;
+	line-height:42px;
+}
+.table1 .tbtns > button.tbtn1 {
 	background: #666;
 }
 .table1 .tbtns > a.tbtn2 {
@@ -84,16 +93,16 @@
 	margin-bottom:40px;
 	text-align:center;
 }
+
+
+
+
+
 @media(max-width: 768px){
 	#tkdtp img{
    		width:450px;
     }
 }
-
-
-
-
-
 @media(max-width: 768px){
 	.table1{
    		position:relative; 

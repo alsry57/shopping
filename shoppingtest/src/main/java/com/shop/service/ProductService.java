@@ -2,7 +2,6 @@ package com.shop.service;
 
 import java.util.List;
 
-import com.shop.dto.CartDTO;
 import com.shop.dto.CartListDTO;
 import com.shop.dto.ProductDTO;
 import com.shop.vo.PageMaker;
@@ -23,11 +22,13 @@ public interface ProductService {
 	  
 	  public ProductDTO view(String productnum) throws Exception;
 	  
-	  public void addCart(CartDTO cart) throws Exception;
+	  public void addCart(CartListDTO cart) throws Exception;
 	  
 	  public List<CartListDTO> cartList(String id)throws Exception;
 	  
-	  
+	  public void deleteCart(CartListDTO cart) throws Exception;
+	  public List<ProductDTO> ProductSearch(PageMaker pm)throws Exception;	  
+	  public int ProductSearchCount(PageMaker pm)throws Exception;
 		public List<ProductDTO> listSearchCriteria(PageMaker pm) throws Exception;
 		public int listSearchCount(PageMaker pm) throws Exception;
 }

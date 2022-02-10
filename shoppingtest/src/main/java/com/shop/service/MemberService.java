@@ -16,6 +16,6 @@ public interface MemberService {
 	
 	public MemberDTO selectName(String name) throws Exception;
 	public MemberDTO selectLogin(String id,String pw) throws Exception;
-	public MemberDTO selectAuthority(int authority) throws Exception;
+
 	
 }

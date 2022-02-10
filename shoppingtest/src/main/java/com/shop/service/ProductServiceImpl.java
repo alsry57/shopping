@@ -6,8 +6,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.shop.dao.MemberDAO;
 import com.shop.dao.ProductDAO;
-import com.shop.dto.CartDTO;
 import com.shop.dto.CartListDTO;
 import com.shop.dto.ProductDTO;
 import com.shop.vo.PageMaker;
@@ -76,14 +76,37 @@ public class ProductServiceImpl implements ProductService {
 	   }
 
 	@Override
-	public void addCart(CartDTO cart) throws Exception {
+	public void addCart(CartListDTO cart) throws Exception {	
+		ProductDAO dao = sqlSession.getMapper(ProductDAO.class);
 		dao.addCart(cart);
 		
 	}
 
 	@Override
-	public List<CartListDTO> cartList(String id) throws Exception {
+	public List<CartListDTO> cartList(String id) throws Exception {	
+		ProductDAO dao = sqlSession.getMapper(ProductDAO.class);
 		return dao.cartList(id);
+	}
+
+	@Override
+	public void deleteCart(CartListDTO cart) throws Exception {
+		ProductDAO dao = sqlSession.getMapper(ProductDAO.class);
+		dao.deleteCart(cart);
+		
+	}
+
+	@Override
+	public List<ProductDTO> ProductSearch(PageMaker pm) throws Exception {
+		// TODO Auto-generated method stub
+		ProductDAO dao = sqlSession.getMapper(ProductDAO.class);
+		return dao.ProductSearch(pm);
+	}
+
+	@Override
+	public int ProductSearchCount(PageMaker pm) throws Exception {
+		// TODO Auto-generated method stub
+		ProductDAO dao=sqlSession.getMapper(ProductDAO.class);
+		return dao.ProductSearchCount(pm);
 	}
 
 

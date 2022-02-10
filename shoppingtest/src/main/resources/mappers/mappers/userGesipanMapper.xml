@@ -4,9 +4,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.shop.dao.UserGesipanDAO">
 <insert id="create">
-insert into usergesipan(bno,id,title,content)
-values (userge.nextval,#{id},#{title},#{content})
+insert into usergesipan(bno,id,title,content,regdate)
+values (userge.nextval,#{id},#{title},#{content},sysdate)
 </insert>
+
+
+<insert id="createRe">
+insert into eventreply(bno,rno,content,id)
+values (#{bno},EVENTREPLYSEQ.NEXTVAL,#{content},#{id})
+</insert>
+
+<delete id="replyRemove">
+delete from eventreply where rno=#{rno}
+</delete>
+<update id="viewcount">
+update usergesipan set viewcnt = viewcnt+1 where bno=#{bno}
+</update>
+
 
 <select id="read" resultType="UserGesipanDTO">
 select * from usergesipan where bno=#{bno}

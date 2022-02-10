@@ -55,14 +55,6 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public MemberDTO selectAuthority(int authority) throws Exception {
-		// TODO Auto-generated method stub
-		MemberDAO dao = sqlSession.getMapper(MemberDAO.class);
-
-		return dao.selectAuthority(authority);
-	}
-
-	@Override
 	public MemberDTO selectLogin(String id,String pw) throws Exception {
 		// TODO Auto-generated method stub
 		MemberDAO dao = sqlSession.getMapper(MemberDAO.class);

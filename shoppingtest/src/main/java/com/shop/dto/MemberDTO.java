@@ -13,7 +13,7 @@ public class MemberDTO {
    private String email;
    private String address;
    private String phonenum;
-   private int authority;
+   private String authority;
    
    @Override
    public String toString() {
@@ -103,11 +103,11 @@ public class MemberDTO {
       this.phonenum = phonenum;
    }
 
-   public int getAuthority() {
+   public String getAuthority() {
       return authority;
    }
 
-   public void setAuthority(int authority) {
+   public void setAuthority(String authority) {
       this.authority = authority;
    }
    

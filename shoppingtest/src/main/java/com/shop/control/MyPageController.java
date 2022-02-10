@@ -17,6 +17,7 @@ import com.shop.dto.MemberDTO;
 import com.shop.service.MemberService;
 import com.shop.service.OrderService;
 import com.shop.service.UserGesipanService;
+import com.shop.vo.PageMaker;
 
 /**
  * Handles requests for the application home page.
@@ -52,14 +53,17 @@ public class MyPageController {
 	}
 	
 	@RequestMapping(value = "/mypage2", method = RequestMethod.GET)
-	public String myPage2(Model model, RedirectAttributes rttr,HttpServletRequest request) throws Exception {
+	public String myPage2(PageMaker pm,Model model, RedirectAttributes rttr,HttpServletRequest request) throws Exception {
 		HttpSession session = request.getSession();
 		id = (String)session.getAttribute("id");
 		if(id == null) {
 			rttr.addFlashAttribute("msg","nolog");
 			return "redirect:/login/login"; 
 		}
-		model.addAttribute("mypost", userService.myread(id));
+		pm.setTotalCount(orderService.mypostCount(id));
+		model.addAttribute("mypost", orderService.mypostList(pm,id));
+		
+		
 		return "/mypage/mypage2";
 		  
 	}

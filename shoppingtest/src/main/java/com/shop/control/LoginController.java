@@ -62,6 +62,7 @@ public class LoginController {
 				session.setAttribute("id", m.getId());
 				session.setAttribute("authority", m.getAuthority());
 				System.out.println(m.getId()+m.getPw());
+				System.out.println(m.getAuthority());
 			}else {
 				rttr.addFlashAttribute("msg","fail");
 				session.invalidate();

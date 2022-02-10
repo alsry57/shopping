@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.shop.dto.UserGesipanDTO;
+import com.shop.dto.ReplyDTO;
+import com.shop.service.EventService;
 import com.shop.service.UserGesipanService;
 import com.shop.vo.PageMaker;
 
@@ -22,13 +24,15 @@ import com.shop.vo.PageMaker;
 @RequestMapping("/")
 public class UserGesipanContrller {
 	@Inject
+	
 	  private UserGesipanService es;
+	
 
 
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	@RequestMapping(value = "/usergesipan/usergesipanmain", method = RequestMethod.GET)
-	public String list(PageMaker pm,Model model) throws Exception {
+	public void list(PageMaker pm,Model model) throws Exception {
 		
 		logger.info("listPage");
 		System.out.println(pm);
@@ -37,7 +41,7 @@ public class UserGesipanContrller {
 		pm.setTotalCount(es.UserGesipanlistSearchCount(pm));
 		//model.addAttribute("pageMaker",pm);
 		//return "sboard/list";
-		return "/usergesipan/usergesipanmain";
+		
 
 	}
 	
@@ -62,9 +66,31 @@ public class UserGesipanContrller {
 	@RequestMapping(value = "/usergesipan/usergesipanread", method = RequestMethod.GET)
 	public void read(@RequestParam("bno") int bno,PageMaker pm,Model model) throws Exception {
 		System.out.println(pm);
+		es.viewcount(bno);
 		model.addAttribute(es.read(bno));
 		System.out.println(es.read(bno)+"테스트");
+		model.addAttribute("replyList",es.readReply(bno));
 		
+	}
+	
+	@RequestMapping(value = "/usergesipan/usergesipanreadRemove", method = RequestMethod.GET)
+	public String replyRemove(@RequestParam("rno") int rno,@RequestParam("bno") int bno,PageMaker pm,RedirectAttributes rttr) throws Exception {
+		System.out.println("확인"+bno+rno);
+		es.replyRemove(rno);
+		rttr.addAttribute("bno",bno);
+		return "redirect:/usergesipan/usergesipanread";	
+	}
+	// http://localhost:8081/control/usergesipan/usergesipanread?page=1&perPageNum=9&searchType&keyword&bno=2
+	@RequestMapping(value = "/usergesipan/usergesipanread", method = RequestMethod.POST)
+	
+	public String readReply(ReplyDTO reply,RedirectAttributes rttr) throws Exception {
+		System.out.println("확인하기"+reply);
+		es.writeRe(reply);
+		
+		rttr.addFlashAttribute("msg","success");
+		rttr.addAttribute("bno",reply.getBno());
+		
+		return "redirect:/usergesipan/usergesipanread";	
 	}
 	
 	@RequestMapping(value = "/usergesipan/usergesipanremove", method = RequestMethod.POST)

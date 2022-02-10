@@ -40,4 +40,15 @@ public class MainController {
 		  return "main";
 	}
 	
+	@RequestMapping(value = "/search", method = RequestMethod.GET)
+	public String search(PageMaker pm, Model model) throws Exception {
+		  pm.setProductkind("");
+		  model.addAttribute("list",service.ProductSearch(pm));
+		  pm.setTotalCount(service.ProductSearchCount(pm));
+		  
+		  return "/search";
+	}
+	
+	
+	
 }

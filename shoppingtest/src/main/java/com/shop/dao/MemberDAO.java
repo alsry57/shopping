@@ -20,6 +20,5 @@ public interface MemberDAO {
 	public ArrayList<MemberDTO> selectAll() throws Exception;
 	public MemberDTO selectName(String name) throws Exception;
 	public MemberDTO selectLogin(@Param("id") String id,@Param("pw") String pw) throws Exception;
-	public MemberDTO selectAuthority(int authority) throws Exception;
 	
 }
